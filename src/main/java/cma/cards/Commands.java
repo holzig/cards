@@ -21,12 +21,8 @@ public class Commands implements CommandMarker {
 	}
 
 	@CliCommand("card")
-	public void simple(@CliOption(mandatory = true, key = "") String text) {
-		try {
-			pdfService.createPdf(text, "/tmp/");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void card(@CliOption(mandatory = true, key = "") String text) throws IOException {
+		pdfService.createPdf(text, "/tmp/");
 	}
-	
+
 }
