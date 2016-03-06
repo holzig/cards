@@ -8,7 +8,9 @@ public class PdfSpike {
 
 	@Test
 	public void testName() throws Exception {
-		service.createPdf("Test", "/tmp/");
+		String text = "Kuh";
+		service.createPdf(text, "/tmp/", 240, false);
 	}
+
 
 }

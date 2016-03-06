@@ -1,5 +1,6 @@
 package cma.cards;
 
+import java.awt.print.PrinterException;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,16 @@ public class Commands implements CommandMarker {
 	@Autowired
 	private PdfService pdfService;
 
-	@CliAvailabilityIndicator({ "test" })
+	@CliAvailabilityIndicator({ "card" })
 	public boolean isCommandAvailable() {
 		return true;
 	}
 
 	@CliCommand("card")
-	public void card(@CliOption(mandatory = true, key = "") String text) throws IOException {
-		pdfService.createPdf(text, "/tmp/");
+	public void card(@CliOption(mandatory = true, key = "") String text,
+			@CliOption(key = "print", specifiedDefaultValue = "true", unspecifiedDefaultValue = "false") boolean print)
+			throws IOException, PrinterException {
+		pdfService.createPdf(text, "/tmp/", 240, print);
 	}
 
 }
